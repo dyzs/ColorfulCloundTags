@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="cloudlayout_spacing">15dp</dimen>
+    <dimen name="cloudlayout_padding">15dp</dimen>
+    <dimen name="hot_textview_hor_padding">12dp</dimen>
+    <dimen name="hot_textview_ver_padding">6dp</dimen>
+
+    <dimen name="hot_textview_radius">20dip</dimen>
+
+
+</resources>
