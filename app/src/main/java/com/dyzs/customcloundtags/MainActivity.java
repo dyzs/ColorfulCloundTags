@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -50,37 +51,12 @@ public class MainActivity extends Activity {
 
         initView();
 
-        addDataIntoCCTC();
+//        addDataIntoCCTC();
 
         addLayoutDataIntoCCTC();
 
     }
 
-    private void addLayoutDataIntoCCTC() {
-        textHorPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_hor_padding);
-        textVerPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_ver_padding);
-        radius = (int) mContext.getResources().getDimension(R.dimen.hot_textview_radius);
-        ImageView imageView;
-        if (mList != null) {
-            for (int i = 0; i < mList.size(); i++) {
-                imageView = (ImageView) LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
-                imageView.setPadding(textHorPadding, textVerPadding, textHorPadding, textVerPadding);
-
-//                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
-//                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
-//
-//                imageView.setBackgroundDrawable(DrawableUtil.generateSelector(pressed, normal));
-                CCTLayout.addView(imageView);
-
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.makeText(mContext, "i:");
-                    }
-                });
-            }
-        }
-    }
 
     private void initView() {
         ll_content = (LinearLayout) findViewById(R.id.ll_content);
@@ -92,6 +68,7 @@ public class MainActivity extends Activity {
         int spacing = (int) mContext.getResources().getDimension(R.dimen.cloudlayout_spacing);
         CCTLayout.setHorizontalSpacing(spacing);
         CCTLayout.setVerticalSpacing(spacing);
+//        CCTLayout.setOnLongClickListener(new CCTLLongClickListener());
         sv.addView(CCTLayout);
     }
 
@@ -145,5 +122,59 @@ public class MainActivity extends Activity {
         mList.add("印度尼西亚");
         mList.add("文莱");
         mList.add("菲律宾");
+    }
+
+    private void addLayoutDataIntoCCTC() {
+        textHorPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_hor_padding);
+        textVerPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_ver_padding);
+        radius = (int) mContext.getResources().getDimension(R.dimen.hot_textview_radius);
+        if (mList != null) {
+            for (int i = 0; i < mList.size(); i++) {
+                final RelativeLayout itemView = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
+                itemView.setPadding(textHorPadding, textVerPadding, textHorPadding, textVerPadding);
+
+                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
+                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
+
+                itemView.setBackgroundDrawable(DrawableUtil.generateSelector(pressed, normal));
+                CCTLayout.addView(itemView);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.makeText(mContext, "i:");
+                    }
+                });
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        ToastUtil.makeText(mContext, "item view long click");
+                        final ImageView delChild = (ImageView) itemView.findViewById(R.id.iv_del);
+                        delChild.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ToastUtil.makeText(mContext, "del click");
+                            }
+                        });
+                        delChild.setVisibility(View.VISIBLE);
+                        return true;
+                    }
+                });
+            }
+        }
+    }
+
+    class CCTLLongClickListener implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(View v) {
+//            ToastUtil.makeText(mContext, "this is long click");
+//            CustomCloudTagsLayout cctl = (CustomCloudTagsLayout) v;
+//            TextView tv = (TextView) cctl.getChildAt(5);
+//            tv.setBackgroundResource(R.drawable.shape_big_btn_bg);
+
+
+
+            return true;
+        }
     }
 }
