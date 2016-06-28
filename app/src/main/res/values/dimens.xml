@@ -11,5 +11,5 @@
 
     <dimen name="hot_textview_radius">20dip</dimen>
 
-
+    <dimen name="view_stroke">1dip</dimen>
 </resources>

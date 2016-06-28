@@ -1,5 +1,6 @@
 package com.dyzs.customcloundtags.utils;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -73,6 +74,14 @@ public class DrawableUtil {
 	 */
 	public static GradientDrawable generateDrawable(int argb, float radius) {
 		GradientDrawable drawable = new GradientDrawable();
+		drawable.setShape(GradientDrawable.RECTANGLE);	// 设置为矩形，默认就是矩形
+		drawable.setCornerRadius(radius);				// 设置圆形的半径
+		drawable.setColor(argb);
+		return drawable;
+	}
+	public static GradientDrawable generateDrawable(int argb, float radius, int stroke) {
+		GradientDrawable drawable = new GradientDrawable();
+		drawable.setStroke(stroke, Color.BLACK);
 		drawable.setShape(GradientDrawable.RECTANGLE);	// 设置为矩形，默认就是矩形
 		drawable.setCornerRadius(radius);				// 设置圆形的半径
 		drawable.setColor(argb);

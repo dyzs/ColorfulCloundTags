@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.dyzs.customcloundtags.utils.ColorUtil;
+import com.dyzs.customcloundtags.utils.DensityUtils;
 import com.dyzs.customcloundtags.utils.DrawableUtil;
 import com.dyzs.customcloundtags.utils.ToastUtil;
 import com.dyzs.customcloundtags.view.CustomCloudTagsLayout;
@@ -128,13 +129,14 @@ public class MainActivity extends Activity {
         textHorPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_hor_padding);
         textVerPadding = (int) mContext.getResources().getDimension(R.dimen.hot_textview_ver_padding);
         radius = (int) mContext.getResources().getDimension(R.dimen.hot_textview_radius);
+        int stroke = 2;
         if (mList != null) {
             for (int i = 0; i < mList.size(); i++) {
                 final RelativeLayout itemView = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
                 itemView.setPadding(textHorPadding, textVerPadding, textHorPadding, textVerPadding);
 
-                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
-                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius);
+                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke);
+                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke);
 
                 itemView.setBackgroundDrawable(DrawableUtil.generateSelector(pressed, normal));
                 CCTLayout.addView(itemView);
