@@ -3,6 +3,7 @@ package com.dyzs.customcloundtags;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.dyzs.customcloundtags.activity.TagOperatorActivity;
 import com.dyzs.customcloundtags.utils.ColorUtil;
 import com.dyzs.customcloundtags.utils.DensityUtils;
 import com.dyzs.customcloundtags.utils.DrawableUtil;
@@ -28,7 +30,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener{
     private List<String> mList;
     private Context mContext;
     private CustomCloudTagsLayout CCTLayout;
@@ -39,6 +41,7 @@ public class MainActivity extends Activity {
     private ScrollView sv;
 
 
+    private TextView tv_jump_to_choose_tag;
 //    private TextView textView;
 
     @Override
@@ -71,6 +74,9 @@ public class MainActivity extends Activity {
         CCTLayout.setVerticalSpacing(spacing);
 //        CCTLayout.setOnLongClickListener(new CCTLLongClickListener());
         sv.addView(CCTLayout);
+
+        tv_jump_to_choose_tag = (TextView) findViewById(R.id.tv_jump_to_choose_tag);
+        tv_jump_to_choose_tag.setOnClickListener(this);
     }
 
 
@@ -177,6 +183,15 @@ public class MainActivity extends Activity {
 
 
             return true;
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_jump_to_choose_tag) {
+            Intent jump = new Intent(MainActivity.this, TagOperatorActivity.class);
+            startActivity(jump);
         }
     }
 }
