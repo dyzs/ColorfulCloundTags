@@ -13,6 +13,19 @@
         android:textColor="@android:color/black"
         android:gravity="center"
         />
+
+    <TextView
+        android:id="@+id/tv_jump_to_choose_new_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义组合text view"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_blue_light"
+        />
+
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"

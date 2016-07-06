@@ -81,7 +81,7 @@ public class DrawableUtil {
 	}
 	public static GradientDrawable generateDrawable(int argb, float radius, int stroke) {
 		GradientDrawable drawable = new GradientDrawable();
-		drawable.setStroke(stroke, Color.BLACK);
+		drawable.setStroke(stroke, argb);
 		drawable.setShape(GradientDrawable.RECTANGLE);	// 设置为矩形，默认就是矩形
 		drawable.setCornerRadius(radius);				// 设置圆形的半径
 		drawable.setColor(argb);

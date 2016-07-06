@@ -13,7 +13,6 @@
         android:gravity="center"
         android:textSize="20sp"
         android:text="Holy"
-        android:background="@android:color/holo_blue_bright"
         />
     <ImageView
         android:id="@+id/iv_item_del"

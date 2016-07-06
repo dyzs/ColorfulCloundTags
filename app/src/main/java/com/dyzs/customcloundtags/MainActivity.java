@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.dyzs.customcloundtags.activity.LabelActivity;
 import com.dyzs.customcloundtags.activity.TagOperatorActivity;
 import com.dyzs.customcloundtags.utils.ColorUtil;
 import com.dyzs.customcloundtags.utils.DensityUtils;
@@ -41,7 +42,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ScrollView sv;
 
 
-    private TextView tv_jump_to_choose_tag;
+    private TextView tv_jump_to_choose_tag, tv_jump_to_choose_new_tag;
 //    private TextView textView;
 
     @Override
@@ -77,6 +78,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         tv_jump_to_choose_tag = (TextView) findViewById(R.id.tv_jump_to_choose_tag);
         tv_jump_to_choose_tag.setOnClickListener(this);
+
+        tv_jump_to_choose_new_tag = (TextView) findViewById(R.id.tv_jump_to_choose_new_tag);
+        tv_jump_to_choose_new_tag.setOnClickListener(this);
     }
 
 
@@ -191,6 +195,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         if (v.getId() == R.id.tv_jump_to_choose_tag) {
             Intent jump = new Intent(MainActivity.this, TagOperatorActivity.class);
+            startActivity(jump);
+        }
+        else if (v.getId() == R.id.tv_jump_to_choose_new_tag) {
+            Intent jump = new Intent(MainActivity.this, LabelActivity.class);
             startActivity(jump);
         }
     }

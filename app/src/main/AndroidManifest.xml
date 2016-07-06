@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.TagOperatorActivity" />
+        <activity android:name=".activity.LabelActivity" />
     </application>
 
 </manifest>
