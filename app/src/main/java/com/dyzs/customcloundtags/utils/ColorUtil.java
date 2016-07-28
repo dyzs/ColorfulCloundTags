@@ -47,6 +47,6 @@ public class ColorUtil {
 	 */
 	public static int getColorDeeply(int color) {
 //		| 0xF0000000 & 0xFFF5F5F5
-		return color & 0xFFD9D9D9;
+		return color & 0xFFDDDDDD;
 	}
 }
