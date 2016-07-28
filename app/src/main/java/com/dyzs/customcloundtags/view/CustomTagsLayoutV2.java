@@ -85,7 +85,8 @@ public class CustomTagsLayoutV2 extends ViewGroup {
             float perSpacing = remainSpacing / viewList.size();
             for (int j = 0; j < viewList.size(); j++) {
                 View childView = viewList.get(j);
-                int widthMeasureSpec = MeasureSpec.makeMeasureSpec((int) (childView.getMeasuredWidth() + perSpacing), MeasureSpec.EXACTLY);
+                int widthMeasureSpec = MeasureSpec.makeMeasureSpec(
+                        (int) (childView.getMeasuredWidth() + perSpacing), MeasureSpec.EXACTLY);//EXACTLY:修改模式可以就可以修改View的显示
                 childView.measure(widthMeasureSpec, 0);
                 if (j == 0) {
                     childView.layout(paddingLeft, paddingTop, paddingLeft + childView.getMeasuredWidth(),
