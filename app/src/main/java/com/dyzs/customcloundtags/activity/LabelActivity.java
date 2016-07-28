@@ -82,8 +82,8 @@ public class LabelActivity extends Activity implements View.OnClickListener{
 
                 tag.setText(info.tagName);
 
-                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke);
-                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke);
+                Drawable normal = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke, DrawableUtil.STROKE_DEEPLY);
+                Drawable pressed = DrawableUtil.generateDrawable(ColorUtil.randomColor(), radius, stroke, DrawableUtil.STROKE_DEEPLY);
 
 
                 itemView.setBackgroundDrawable(DrawableUtil.generateSelector(pressed, normal));
@@ -99,7 +99,7 @@ public class LabelActivity extends Activity implements View.OnClickListener{
                     @Override
                     public boolean onLongClick(View v) {
                         ToastUtil.makeText(mContext, "item view long click");
-                        final ImageView delChild = (ImageView) itemView.findViewById(R.id.iv_del);
+                        final ImageView delChild = (ImageView) itemView.findViewById(R.id.iv_item_del);
                         delChild.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

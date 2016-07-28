@@ -38,4 +38,15 @@ public class ColorUtil {
 
 		return Color.argb(alpha, red, green, blue);		// 根据argb混合生成一种新的颜色
 	}
+
+
+	/**
+	 * 颜色与上一个十六进制数ARGB，得到一个颜色加深的效果，效果从 0-F 深
+	 * @param color
+	 * @return
+	 */
+	public static int getColorDeeply(int color) {
+//		| 0xF0000000 & 0xFFF5F5F5
+		return color & 0xFFD9D9D9;
+	}
 }
