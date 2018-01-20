@@ -1,4 +1,4 @@
-package com.dyzs.customcloundtags.component;
+package com.dyzs.labels.component;
 
 /*
  * Copyright (C) 2014 The Android Open Source Project

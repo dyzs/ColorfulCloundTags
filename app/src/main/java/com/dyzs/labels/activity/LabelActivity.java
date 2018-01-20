@@ -1,9 +1,8 @@
-package com.dyzs.customcloundtags.activity;
+package com.dyzs.labels.activity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,13 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.dyzs.customcloundtags.R;
-import com.dyzs.customcloundtags.adapter.TagsAdapter;
-import com.dyzs.customcloundtags.entity.TagsItemInfo;
-import com.dyzs.customcloundtags.utils.ColorUtil;
-import com.dyzs.customcloundtags.utils.DrawableUtil;
-import com.dyzs.customcloundtags.utils.ToastUtil;
-import com.dyzs.customcloundtags.view.CustomCloudTagsLayout;
+import com.dyzs.labels.R;
+import com.dyzs.labels.adapter.LabelsAdapter;
+import com.dyzs.labels.entity.LabelsItemInfo;
+import com.dyzs.labels.utils.ColorUtil;
+import com.dyzs.labels.utils.DrawableUtil;
+import com.dyzs.labels.utils.ToastUtil;
+import com.dyzs.labels.view.LabelsLayout;
 
 import java.util.ArrayList;
 
@@ -39,13 +38,12 @@ public class LabelActivity extends Activity implements View.OnClickListener{
 
     private Context mContext;
 
+    private RecyclerView mRvAddedLabelsList;
+    private LabelsAdapter mAddedAdapter;
+    private ArrayList<LabelsItemInfo> mDataList;
 
-    private RecyclerView mRvAddedTagsList;
-    private TagsAdapter mAddedAdapter;
-    private ArrayList<TagsItemInfo> mDataList;
-
-    private ScrollView sv_tags_container;
-    private CustomCloudTagsLayout CCTLayout;
+    private ScrollView sv_labels_container;
+    private LabelsLayout labelsLayout;
     private int textHorPadding, textVerPadding;
     private float radius;
     @Override
@@ -70,7 +68,7 @@ public class LabelActivity extends Activity implements View.OnClickListener{
 
         TextView tag;
         ImageView del;
-        TagsItemInfo info;
+        LabelsItemInfo info;
         if (mDataList != null) {
             for (int i = 0; i < mDataList.size(); i++) {
                 info = mDataList.get(i);
@@ -87,7 +85,7 @@ public class LabelActivity extends Activity implements View.OnClickListener{
 
 
                 itemView.setBackgroundDrawable(DrawableUtil.generateSelector(pressed, normal));
-                CCTLayout.addView(itemView);
+                labelsLayout.addView(itemView);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,9 +114,9 @@ public class LabelActivity extends Activity implements View.OnClickListener{
 
     private void preparedListData() {
         mDataList = new ArrayList<>();
-        TagsItemInfo info;
+        LabelsItemInfo info;
         for (int i = 0; i < TEMP_DATAS.length; i ++) {
-            info = new TagsItemInfo();
+            info = new LabelsItemInfo();
             info.isSelected = false;
             info.isInEditing = false;
             info.tagName = TEMP_DATAS[i];
@@ -127,12 +125,12 @@ public class LabelActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        mRvAddedTagsList = (RecyclerView) findViewById(R.id.rv_added_tags_list);
-        mRvAddedTagsList.setHasFixedSize(true);
+        mRvAddedLabelsList = (RecyclerView) findViewById(R.id.rv_added_labels_list);
+        mRvAddedLabelsList.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3);
-        mRvAddedTagsList.setLayoutManager(layoutManager);
-        mAddedAdapter = new TagsAdapter(mContext, mDataList);
-        mAddedAdapter.setHandleFilterListener(new TagsAdapter.HandleFilterListener() {
+        mRvAddedLabelsList.setLayoutManager(layoutManager);
+        mAddedAdapter = new LabelsAdapter(mContext, mDataList);
+        mAddedAdapter.setHandleFilterListener(new LabelsAdapter.HandleFilterListener() {
             @Override
             public void handleFilter(int position) {
                 for (int i = 0 ; i < mDataList.size(); i ++) {
@@ -141,18 +139,18 @@ public class LabelActivity extends Activity implements View.OnClickListener{
                 mDataList.get(position).isSelected = true;
             }
         });
-        mRvAddedTagsList.setAdapter(mAddedAdapter);
+        mRvAddedLabelsList.setAdapter(mAddedAdapter);
 
-        sv_tags_container = (ScrollView) findViewById(R.id.sv_tags_container);
-        CCTLayout = new CustomCloudTagsLayout(mContext);
+        sv_labels_container = (ScrollView) findViewById(R.id.sv_labels_container);
+        labelsLayout = new LabelsLayout(mContext);
         int padding = (int) mContext.getResources().getDimension(R.dimen.cloudlayout_padding);
-        CCTLayout.setPadding(padding, padding, padding, padding);
+        labelsLayout.setPadding(padding, padding, padding, padding);
 
         int spacing = (int) mContext.getResources().getDimension(R.dimen.cloudlayout_spacing);
-        CCTLayout.setHorizontalSpacing(spacing);
-        CCTLayout.setVerticalSpacing(spacing);
+        labelsLayout.setHorizontalSpacing(spacing);
+        labelsLayout.setVerticalSpacing(spacing);
 
-        sv_tags_container.addView(CCTLayout);
+        sv_labels_container.addView(labelsLayout);
     }
 
     @Override

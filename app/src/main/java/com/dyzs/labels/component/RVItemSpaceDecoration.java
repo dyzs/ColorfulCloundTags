@@ -1,10 +1,8 @@
-package com.dyzs.customcloundtags.component;
+package com.dyzs.labels.component;
 
-import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by maidou on 2016/4/11.

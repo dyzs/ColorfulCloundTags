@@ -1,28 +1,28 @@
-package com.dyzs.customcloundtags.view;
+package com.dyzs.labels.view;
+
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 /**
  * create by maidou
  */
-public class CustomTagsLayoutV2 extends ViewGroup {
+public class LabelsLayout extends ViewGroup {
     private static final int DEFAULT_SPACING = 10;
     private int horizontalSpacing = DEFAULT_SPACING;            // lineView 之间的水平间距
     private int verticalSpacing = DEFAULT_SPACING;              // TextView 之间的垂直间距
 
-    private ArrayList<Line> lineList = new ArrayList<CustomTagsLayoutV2.Line>();
-    public CustomTagsLayoutV2(Context context, AttributeSet attrs, int defStyle) {
+    private ArrayList<Line> lineList = new ArrayList<LabelsLayout.Line>();
+    public LabelsLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-    public CustomTagsLayoutV2(Context context, AttributeSet attrs) {
+    public LabelsLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-    public CustomTagsLayoutV2(Context context) {
+    public LabelsLayout(Context context) {
         super(context);
     }
 
@@ -48,11 +48,14 @@ public class CustomTagsLayoutV2 extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
             childView.measure(0, 0);
+//			childView.getViewTreeObserver().addOnGlobalLayoutListener(listener)// 这个添加的是全局的布局监听
+            // 如果当前 Line 中没有 TextView ，则直接放入当前 Line 中
             if (line.getViewList().size() == 0) {
                 line.addLineView(childView);
             } else if (line.getWidth() + horizontalSpacing + childView.getMeasuredWidth() > noPaddingWidth) {
-                lineList.add(line);
-                line = new Line();
+                // 如果当前line的宽+水平间距+childView的宽大于noPaddingWidth，则换行
+                lineList.add(line); // 换行之前先保存之前的 line 对象
+                line = new Line();  // 重新创建 line
 
                 line.addLineView(childView);
             } else {
@@ -65,10 +68,13 @@ public class CustomTagsLayoutV2 extends ViewGroup {
 
         int height = getPaddingTop() + getPaddingBottom();
         for (int i = 0; i < lineList.size(); i++) {
+            // += 完上下的padding值后，再把每个 line 的高度加进来
             height += lineList.get(i).getHeight();
         }
+        // 再在 height 上加上每个 line 的间距
         height += (lineList.size() - 1) * verticalSpacing;
         setMeasuredDimension(width, height);
+        // System.out.println("onMeasure width:" + width + "/height:" + height);
     }
 
     @Override
@@ -76,22 +82,30 @@ public class CustomTagsLayoutV2 extends ViewGroup {
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
         for (int i = 0; i < lineList.size(); i++) {
-            Line line = lineList.get(i);
+            Line line = lineList.get(i);    // 获取每个 line 对象
+
+            // 从第二行开始，他们的top总是比上一行多一个行高+垂直间距
             if (i > 0) {
                 paddingTop += lineList.get(i - 1).getHeight() + verticalSpacing;
             }
+            // 因为我们要获取的是每个 line 里面的 textview，所以通过 getViewList
             ArrayList<View> viewList = line.getViewList();
+            // 计算出当前 line 的剩余空间区域的值
             int remainSpacing = getLineRemainSpacing(line);
+            // 计算每个 TextView 分配留白（剩余空间）的值
             float perSpacing = remainSpacing / viewList.size();
+            // 因为我们要获取的是每个 line 里面的 textview，所以通过 getViewList
             for (int j = 0; j < viewList.size(); j++) {
-                View childView = viewList.get(j);
-                int widthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                        (int) (childView.getMeasuredWidth() + perSpacing), MeasureSpec.EXACTLY);//EXACTLY:修改模式可以就可以修改View的显示
+                View childView = viewList.get(j);    // 获取每个 textView
+                int widthMeasureSpec = MeasureSpec.makeMeasureSpec((int) (childView.getMeasuredWidth() + perSpacing), MeasureSpec.EXACTLY);
                 childView.measure(widthMeasureSpec, 0);
-                if (j == 0) {
+
+                if (j == 0) {    // 表示当前是第一个 TextView
+                    // 摆放每行的第一个 TextView
                     childView.layout(paddingLeft, paddingTop, paddingLeft + childView.getMeasuredWidth(),
                             paddingTop + childView.getMeasuredHeight());
                 } else {
+                    // 摆放后面的 textView ，需要参照前一个 View
                     View preView = viewList.get(j - 1);
                     int left = preView.getRight() + horizontalSpacing;
                     childView.layout(left, preView.getTop(), left + childView.getMeasuredWidth(),

@@ -1,4 +1,4 @@
-package com.dyzs.customcloundtags.utils;
+package com.dyzs.labels.utils;
 
 import java.util.Random;
 

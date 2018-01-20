@@ -1,29 +1,27 @@
-package com.dyzs.customcloundtags.adapter;
+package com.dyzs.labels.adapter;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dyzs.customcloundtags.R;
-import com.dyzs.customcloundtags.entity.TagsItemInfo;
+import com.dyzs.labels.R;
+import com.dyzs.labels.entity.LabelsItemInfo;
 
 import java.util.ArrayList;
 
 /**
  * Created by maidou on 2016/3/28.
  */
-public class TagsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class LabelsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
-    private ArrayList<TagsItemInfo> mList;
+    private ArrayList<LabelsItemInfo> mList;
 
     private int mHeight, mWidth;
-    public TagsAdapter(Context context, ArrayList<TagsItemInfo> list) {
+    public LabelsAdapter(Context context, ArrayList<LabelsItemInfo> list) {
         this.context = context;
         this.mList = list;
     }

@@ -1,9 +1,9 @@
-package com.dyzs.customcloundtags.entity;
+package com.dyzs.labels.entity;
 
 /**
  * Created by maidou on 2016/7/5.
  */
-public class TagsItemInfo {
+public class LabelsItemInfo {
     public String tagName = "";
     public boolean isSelected = false;
     public boolean isInEditing = false;

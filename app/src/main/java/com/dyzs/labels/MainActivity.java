@@ -1,4 +1,4 @@
-package com.dyzs.customcloundtags;
+package com.dyzs.labels;
 
 
 import android.app.Activity;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,15 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.dyzs.customcloundtags.activity.LabelActivity;
-import com.dyzs.customcloundtags.activity.TagOperatorActivity;
-import com.dyzs.customcloundtags.utils.ColorUtil;
-import com.dyzs.customcloundtags.utils.DensityUtils;
-import com.dyzs.customcloundtags.utils.DrawableUtil;
-import com.dyzs.customcloundtags.utils.ToastUtil;
-import com.dyzs.customcloundtags.view.CustomCloudTagsLayout;
-
-import org.w3c.dom.Text;
+import com.dyzs.labels.activity.LabelActivity;
+import com.dyzs.labels.utils.ColorUtil;
+import com.dyzs.labels.utils.DrawableUtil;
+import com.dyzs.labels.utils.ToastUtil;
+import com.dyzs.labels.view.LabelsLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +29,7 @@ import java.util.List;
 public class MainActivity extends Activity implements View.OnClickListener{
     private List<String> mList;
     private Context mContext;
-    private CustomCloudTagsLayout CCTLayout;
+    private LabelsLayout CCTLayout;
     private int textHorPadding, textVerPadding;
     private float radius;
 
@@ -42,7 +37,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ScrollView sv;
 
 
-    private TextView tv_jump_to_choose_tag, tv_jump_to_choose_new_tag;
+    private TextView tv_jump_to_choose_label, tv_jump_to_choose_new_tag;
 //    private TextView textView;
 
     @Override
@@ -56,8 +51,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         initView();
 
-//        addDataIntoCCTC();
-
         addLayoutDataIntoCCTC();
 
     }
@@ -67,7 +60,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         ll_content = (LinearLayout) findViewById(R.id.ll_content);
         sv = (ScrollView) findViewById(R.id.sv);
 
-        CCTLayout = new CustomCloudTagsLayout(mContext);
+        CCTLayout = new LabelsLayout(mContext);
         int padding = (int) mContext.getResources().getDimension(R.dimen.cloudlayout_padding);
         CCTLayout.setPadding(padding, padding, padding, padding);
         int spacing = (int) mContext.getResources().getDimension(R.dimen.cloudlayout_spacing);
@@ -76,8 +69,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 //        CCTLayout.setOnLongClickListener(new CCTLLongClickListener());
         sv.addView(CCTLayout);
 
-        tv_jump_to_choose_tag = (TextView) findViewById(R.id.tv_jump_to_choose_tag);
-        tv_jump_to_choose_tag.setOnClickListener(this);
+        tv_jump_to_choose_label = (TextView) findViewById(R.id.tv_jump_to_choose_tag);
+        tv_jump_to_choose_label.setOnClickListener(this);
 
         tv_jump_to_choose_new_tag = (TextView) findViewById(R.id.tv_jump_to_choose_new_tag);
         tv_jump_to_choose_new_tag.setOnClickListener(this);
@@ -176,28 +169,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    class CCTLLongClickListener implements View.OnLongClickListener {
-        @Override
-        public boolean onLongClick(View v) {
-//            ToastUtil.makeText(mContext, "this is long click");
-//            CustomCloudTagsLayout cctl = (CustomCloudTagsLayout) v;
-//            TextView tv = (TextView) cctl.getChildAt(5);
-//            tv.setBackgroundResource(R.drawable.shape_big_btn_bg);
-
-
-
-            return true;
-        }
-    }
-
-
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.tv_jump_to_choose_tag) {
-            Intent jump = new Intent(MainActivity.this, TagOperatorActivity.class);
-            startActivity(jump);
-        }
-        else if (v.getId() == R.id.tv_jump_to_choose_new_tag) {
+        if (v.getId() == R.id.tv_jump_to_choose_new_tag) {
             Intent jump = new Intent(MainActivity.this, LabelActivity.class);
             startActivity(jump);
         }

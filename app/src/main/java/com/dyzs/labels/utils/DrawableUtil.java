@@ -1,6 +1,5 @@
-package com.dyzs.customcloundtags.utils;
+package com.dyzs.labels.utils;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
